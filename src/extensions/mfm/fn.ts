@@ -13,7 +13,7 @@ export const mfmFn: TokenizerAndRendererExtension = {
 		return src.match(/\$\[/)?.index;
 	},
 	tokenizer(src, _tokens) {
-		const rule = /^\$\[([^ ]+) /;
+		const rule = /^\$\[([^( )]+) /;
 		const match = rule.exec(src);
 		if (!match) return undefined;
 
@@ -26,13 +26,14 @@ export const mfmFn: TokenizerAndRendererExtension = {
 		let ignoreInCode = false;
 		while (level > 0 || i === 0) {
 			if (i >= src.length) {
+				const ret =
+					position.length > 0
+						? src.slice(0, position[position.length - 1])
+						: src;
 				return {
 					type: "text",
-					raw:
-						position.length > 0
-							? src.slice(0, position[position.length - 1])
-							: src,
-					text: "",
+					raw: ret,
+					text: ret,
 				};
 			}
 			if (src[i] === "`") {
@@ -58,7 +59,7 @@ export const mfmFn: TokenizerAndRendererExtension = {
 				type: "text",
 				state: "overflowed",
 				raw: ret,
-				text: "",
+				text: ret,
 			};
 		}
 
@@ -69,7 +70,7 @@ export const mfmFn: TokenizerAndRendererExtension = {
 		const token = {
 			type: "mfm-fn",
 			// not a good idea
-			raw: { length: text.length + 2 + tag.length + 1 } as string,
+			raw: { length: text.length + 2 + tag.length + 2 } as string,
 			tag,
 			tokens: [],
 		};
@@ -78,8 +79,9 @@ export const mfmFn: TokenizerAndRendererExtension = {
 		return token;
 	},
 	renderer(token) {
-		return `<span class="mfm mfm-fn _mfm_${
-			token.tag
-		}_">${this.parser.parseInline(token.tokens!)}</span>`;
+		return `<span class="mfm mfm-fn _mfm_${token.tag.replaceAll(
+			'"',
+			"",
+		)}_">${this.parser.parseInline(token.tokens!)}</span>`;
 	},
 };

@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "build": "yarn tsc",
+    "test": "yarn build && node ./tests/index.js",
     "format": "yarn biome format --write ./src",
     "lint": "yarn biome lint --apply ./src"
   },
@@ -14,8 +15,9 @@
     "marked": "^12.0.2"
   },
   "devDependencies": {
-    "typescript": "^5.4.5",
     "@biomejs/biome": "1.7.3",
-    "mfm-js": "^0.24.0"
+    "@types/node": "^20.12.11",
+    "mfm-js": "^0.24.0",
+    "typescript": "^5.4.5"
   }
 }

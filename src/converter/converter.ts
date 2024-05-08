@@ -80,7 +80,7 @@ function handleHtml(tokens: Token[]): Token[] {
 	}
 
 	for (const token of tokens) {
-		if (asTokenNonGeneric(token) && token.type === "html") {
+		if (token.type === "html" || token.type === "mfm-html") {
 			switch (token.raw.trim()) {
 				case "<b>": {
 					pushStack("</b>");
@@ -106,9 +106,6 @@ function handleHtml(tokens: Token[]): Token[] {
 					popStack(token, "del");
 					break;
 				}
-			}
-		} else if (asTokenExtension(token) && token.type === "mfm-html") {
-			switch (token.raw.trim()) {
 				case "<center>": {
 					pushStack("</center>");
 					break;
@@ -124,6 +121,9 @@ function handleHtml(tokens: Token[]): Token[] {
 				case "</small>": {
 					popStack(token, "mfm-small");
 					break;
+				}
+				default: {
+					top(tokenStack)?.tokens.push(token);
 				}
 			}
 		} else {
@@ -369,12 +369,13 @@ export function convert(tokens?: Token[]): MfmNode[] {
 				}
 				case "mfm-fn": {
 					const [name, argsStr] = token.tag.split(".");
-					const argList = argsStr.split(",");
+					const argList = argsStr?.split(",");
 					const args: Record<string, string | true> = {};
-					for (const arg of argList) {
-						const [k, v] = arg.split("=");
-						args[k] = v ?? true;
-					}
+					if (argList)
+						for (const arg of argList) {
+							const [k, v] = arg.split("=");
+							args[k] = v ?? true;
+						}
 					res.push({
 						type: "fn",
 						props: {

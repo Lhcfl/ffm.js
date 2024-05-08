@@ -21,7 +21,6 @@ interface HtmlTags {
 const BlockTags: HtmlTags = {
 	center: (token) =>
 		token.raw === "<center>" ? `<div style="text-align: center;">` : "</div>",
-	small: keep,
 };
 
 const makeReg = (tags: HtmlTags) =>
