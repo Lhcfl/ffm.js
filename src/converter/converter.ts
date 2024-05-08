@@ -368,7 +368,11 @@ export function convert(tokens?: Token[]): MfmNode[] {
 					break;
 				}
 				case "mfm-fn": {
-					const [name, argsStr] = token.tag.split(".");
+					const dotIndex = token.tag.indexOf(".");
+					const [name, argsStr] =
+						dotIndex === -1
+							? [token.tag, undefined]
+							: [token.tag.slice(0, dotIndex), token.tag.slice(dotIndex + 1)];
 					const argList = argsStr?.split(",");
 					const args: Record<string, string | true> = {};
 					if (argList)
