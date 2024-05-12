@@ -21,9 +21,10 @@ export const convert = _c;
  */
 function handleMfmPlain(text: string) {
 	if (text.match(/<plain>/) == null) return text;
-	return text.replaceAll(/<plain>([\s\S]*?)<\/plain>/g, (_, content) => `<plain>${
-		JSON.stringify(content)
-	}</plain>`);
+	return text.replaceAll(
+		/<plain>([\s\S]*?)<\/plain>/g,
+		(_, content) => `<plain>${JSON.stringify(content)}</plain>`,
+	);
 }
 
 export function parse(text: string) {

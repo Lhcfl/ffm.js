@@ -17,7 +17,7 @@ export const mfmPlain: TokenizerAndRendererExtension = {
 			let text = match[1];
 			try {
 				text = JSON.parse(match[1]);
-			} catch(_e) {
+			} catch (_e) {
 				return undefined;
 			}
 
@@ -27,7 +27,7 @@ export const mfmPlain: TokenizerAndRendererExtension = {
 			if (text[text.length - 1] === "\n") r = -1;
 			if (l !== 0 || r !== 0) {
 				text = text.slice(l, r);
-			} 
+			}
 			return {
 				type: "mfm-plain",
 				raw: match[0],

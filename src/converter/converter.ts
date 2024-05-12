@@ -418,8 +418,8 @@ export function convert(tokens?: Token[]): MfmNode[] {
 						props: {
 							query: token.text,
 							content: token.raw,
-						}
-					})
+						},
+					});
 				}
 			}
 
