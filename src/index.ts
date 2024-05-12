@@ -11,7 +11,19 @@ parser.use(...extensions);
 
 export type * from "./types/index.js";
 
+/**
+ * Convert Marked.lexer result to MFM ast tree
+ */
 export const convert = _c;
+
+/**
+ * Raw extensions.
+ * usage:
+ * ```
+ * marked.use(...FfmExtension);
+ * ```
+ */
+export const FfmExtension = extensions;
 
 /**
  * MFM Plain is special. It is neither an inline element nor a block element.
@@ -27,6 +39,11 @@ function handleMfmPlain(text: string) {
 	);
 }
 
+/**
+ * Parse MfM text to MfM AST tree
+ * @param text
+ * @returns
+ */
 export function parse(text: string) {
 	return convert(parser.lexer(handleMfmPlain(text)));
 }
