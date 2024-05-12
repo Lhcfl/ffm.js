@@ -6,6 +6,7 @@ import { mfmHTML } from "./html.js";
 import { mfmHashtag } from "./hashtag.js";
 import { mfmMath } from "./math.js";
 import { mfmFn } from "./fn.js";
+import { mfmSearch } from "./search.js";
 
 const mfmExtension: MarkedExtension = {
 	extensions: [
@@ -16,6 +17,7 @@ const mfmExtension: MarkedExtension = {
 		mfmHashtag,
 		...mfmMath,
 		mfmFn,
+		mfmSearch,
 	],
 };
 

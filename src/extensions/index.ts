@@ -6,6 +6,7 @@ import type { TokenMfmMath } from "./mfm/math.js";
 import type { TokenMfmMention } from "./mfm/mention.js";
 import mfmExtension from "./mfm/mfm.js";
 import type { TokenMfmPlain } from "./mfm/plain.js";
+import type { TokenMfmSearch } from "./mfm/search.js";
 
 export default [mfmExtension];
 
@@ -17,4 +18,5 @@ export type TokenExtension =
 	| TokenMfmHtml
 	| TokenMfmMath
 	| TokenMfmMention
+	| TokenMfmSearch
 	| TokenMfmPlain;

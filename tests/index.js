@@ -1,4 +1,4 @@
-import parser, { convert } from "../built/index.js";
+import { parser, convert } from "../built/index.js";
 import fs from "node:fs";
 import mfm from "mfm-js";
 import path from "node:path";

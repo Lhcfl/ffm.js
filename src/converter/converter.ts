@@ -412,6 +412,15 @@ export function convert(tokens?: Token[]): MfmNode[] {
 					pushTextNode(token.raw);
 					break;
 				}
+				case "mfm-search": {
+					res.push({
+						type: "search",
+						props: {
+							query: token.text,
+							content: token.raw,
+						}
+					})
+				}
 			}
 
 		switch (token.type) {

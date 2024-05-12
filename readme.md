@@ -12,11 +12,6 @@ FFM.js consists of [Marked](https://github.com/markedjs/marked/) with the MFM ex
 
   Please refer to the corresponding output of `evil.md` after `yarn test`
 
-
-- **`MfmSearch`**
-
-  Not implemented yet 
-
 - **`MfmMention`**
 
   FFM.js now supports dots(`.`) in usernames.

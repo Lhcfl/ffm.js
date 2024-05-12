@@ -4,11 +4,13 @@
   "main": "./built/index.js",
   "license": "MIT",
   "type": "module",
+	"types": "./src/index.ts",
   "scripts": {
-    "build": "yarn tsc",
-    "test": "yarn build && node ./tests/index.js",
-    "format": "yarn biome format --write ./src",
-    "lint": "yarn biome lint --apply ./src"
+		"build": "pnpm swc src --out-dir built --source-maps false --copy-files --strip-leading-paths",
+		"build:debug": "pnpm swc src --out-dir built --source-maps true --copy-files --strip-leading-paths",
+    "test": "pnpm run build && node ./tests/index.js",
+    "format": "pnpm biome format --write ./src",
+    "lint": "pnpm biome lint --apply ./src"
   },
   "dependencies": {
     "emoji-regex": "^10.3.0",
@@ -18,6 +20,9 @@
     "@biomejs/biome": "1.7.3",
     "@types/node": "^20.12.11",
     "mfm-js": "^0.24.0",
+		"@swc/cli": "0.3.12",
+		"@swc/core": "1.5.0",
+		"@swc/types": "^0.1.6",
     "typescript": "^5.4.5"
   }
 }
